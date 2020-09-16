@@ -1,0 +1,51 @@
+version: 2.1
+
+jobs:
+  test:
+    working_directory: ~/digital_collections
+    docker:
+      - image: circleci/elixir:1.9-node
+        environment:
+          MIX_ENV: test
+          HTTP_PORT: 4000
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-hex-cache-{{ checksum "mix.lock" }}
+            - v1-hex-cache-
+            - dependency-cache-
+      - restore_cache:
+          keys:
+            - v1-npm-cache-{{ checksum "assets/package-lock.json" }}
+            - v1-npm-cache-
+      - run:
+          name: Install hex & rebar
+          command: mix do local.hex --force, local.rebar --force
+      - run:
+          name: Install Elixir Dependencies
+          command: mix do deps.get
+      - run:
+          name: Install JS Dependencies
+          command: npm install
+          working_directory: ~/digital_collections/assets
+      - save_cache:
+          key: v1-hex-cache-{{ checksum "mix.lock" }}
+          paths:
+            - ~/digital_collections/deps
+            - ~/digital_collections/_build
+      - save_cache:
+          key: v1-npm-cache-{{ checksum "assets/package-lock.json" }}
+          paths:
+            - ~/digital_collections/assets/node_modules
+      - run:
+          name: Elixir Tests
+          command: mix test && (mix coveralls || true)
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: tests
+
+workflows:
+  ci:
+    jobs:
+      - test
