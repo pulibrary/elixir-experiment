@@ -6,5 +6,12 @@ config :digital_collections, DigitalCollectionsWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+# Configure solr
+config :hui, :default,
+  url: "http://digital_collections.test.solr.lndo.site/solr/digital_collections-core-test",
+  handler: "select", # optional
+  headers: [{"accept", "application/json"}], # optional
+  options: [recv_timeout: 10000] # optional
+
 # Print only warnings and errors during test
 config :logger, level: :warn
