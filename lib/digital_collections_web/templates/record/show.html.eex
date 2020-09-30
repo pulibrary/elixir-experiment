@@ -1,0 +1,1 @@
+<p>It's record <%= @record.id %></p>

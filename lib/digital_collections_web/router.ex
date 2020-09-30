@@ -17,6 +17,7 @@ defmodule DigitalCollectionsWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/record/:id", RecordController, :show
   end
 
   # Other scopes may use custom stacks.
