@@ -1,0 +1,19 @@
+name: digital_collections
+services:
+  digital_collections_test_solr:
+    type: solr:8.4
+    portforward: true
+    core: digital_collections-core-test
+    config:
+      dir: "solr/conf"
+  digital_collections_development_solr:
+    type: solr:8.4
+    portforward: true
+    core: digital_collections-core-dev
+    config:
+      dir: "solr/conf"
+proxy:
+  digital_collections_test_solr:
+    - digital_collections.test.solr.lndo.site:8983
+  digital_collections_development_solr:
+    - digital_collections.dev.solr.lndo.site:8983
