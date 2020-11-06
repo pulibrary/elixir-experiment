@@ -8,6 +8,12 @@ jobs:
         environment:
           MIX_ENV: test
           HTTP_PORT: 4000
+      - image: zookeeper:3.4
+      - image: solr:8.4
+        command:
+          - "sh"
+          - "-c"
+          - wget -O /tmp/security.json "https://gist.githubusercontent.com/eliotjordan/a27be341dc2e7a532bad99203e0f55b7/raw/5866efab9242f953764c1b03d17763309e22948f/security.json" && server/scripts/cloud-scripts/zkcli.sh -zkhost localhost:2181 -cmd putfile /security.json /tmp/security.json && bin/solr -cloud -noprompt -f -p 8888 -z localhost:2181
     steps:
       - checkout
       - restore_cache:
@@ -38,6 +44,13 @@ jobs:
           key: v1-npm-cache-{{ checksum "assets/package-lock.json" }}
           paths:
             - ~/digital_collections/assets/node_modules
+      - run:
+          name: Load config into solr
+          command: |
+            cd solr/conf
+            zip -1 -r solr_config.zip ./*
+            curl -H "Content-type:application/octet-stream" --data-binary @solr_config.zip "http://solr:SolrRocks@127.0.0.1:8888/solr/admin/configs?action=UPLOAD&name=solr"
+            curl -H 'Content-type: application/json' http://solr:SolrRocks@127.0.0.1:8888/api/collections/ -d '{create: {name: core, config: solr, numShards: 1}}'
       - run:
           name: Elixir Tests
           command: mix test && (mix coveralls || true)
