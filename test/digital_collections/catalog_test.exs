@@ -9,7 +9,7 @@ defmodule CatalogTest do
       subjects: ["computers", "hacky sack"]
     }
 
-    {:ok} = Catalog.add(record)
+    {:ok, _response} = Catalog.add(record)
     record = Catalog.get(record.id)
     assert record.titles == ["My Book"]
   end
