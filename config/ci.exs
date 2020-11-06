@@ -8,13 +8,13 @@ config :digital_collections, DigitalCollectionsWeb.Endpoint,
 
 # Configure solr
 config :hui, :default,
-  url: "http://localhost:8888/solr/core",
+  url: "http://solr:SolrRocks@localhost:8888/solr/core",
   handler: "select", # optional
   headers: [{"accept", "application/json"}], # optional
   options: [recv_timeout: 10000] # optional
 
 config :hui, :updater,
-  url: "http://localhost:8888/solr/core",
+  url: "http://solr:SolrRocks@localhost:8888/solr/core",
   handler: "update", # optional
   headers: [{"Content-Type", "application/json"}], # optional
   options: [recv_timeout: 10000] # optional
