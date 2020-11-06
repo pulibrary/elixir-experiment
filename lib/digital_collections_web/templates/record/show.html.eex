@@ -1,1 +1,4 @@
 <p>It's record <%= @record.id %></p>
+<%= for title <- @record.titles do %>
+  <p><%= raw title %></p>
+<% end %>

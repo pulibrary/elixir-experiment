@@ -1,8 +1,11 @@
 defmodule DigitalCollectionsWeb.RecordControllerTest do
+  alias DigitalCollections.Record
   use DigitalCollectionsWeb.ConnCase
 
   test "GET /record/:id", %{conn: conn} do
-    conn = get(conn, "/record/123")
-    assert html_response(conn, 200) =~ "It's record 123"
+    DigitalCollections.Catalog.add(%Record{id: "321", titles: ["I'm a record"] })
+    conn = get(conn, "/record/321")
+    assert html_response(conn, 200) =~ "It's record 321"
+    assert html_response(conn, 200) =~ "I'm a record"
   end
 end

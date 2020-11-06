@@ -4,7 +4,7 @@ defmodule DigitalCollectionsWeb.RecordController do
   alias DigitalCollections.Record
 
   def show(conn, %{"id" => id}) do
-    record = %Record{id: id}
+    record = DigitalCollections.Catalog.get(id)
     render(conn, "show.html", record: record)
   end
 end
