@@ -21,6 +21,13 @@ config :digital_collections, DigitalCollectionsWeb.Endpoint,
     ]
   ]
 
+# Configure solr
+config :hui, :default,
+  url: "http://digital_collections.dev.solr.lndo.site/solr/digital_collections-core-dev",
+  handler: "select", # optional
+  headers: [{"accept", "application/json"}], # optional
+  options: [recv_timeout: 10000] # optional
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

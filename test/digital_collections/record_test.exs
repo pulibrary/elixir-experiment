@@ -4,13 +4,13 @@ defmodule RecordTest do
   test "a record has fields" do
     record = %DigitalCollections.Record{
       id: "1",
-      title: "My Book",
-      author: "Me",
+      titles: ["My Book"],
+      authors: ["Me"],
       subjects: ["computers", "hacky sack"]
     }
     assert record.id == "1"
-    assert record.title == "My Book"
-    assert record.author == "Me"
+    assert record.titles == ["My Book"]
+    assert record.authors == ["Me"]
     assert record.subjects == ["computers", "hacky sack"]
   end
 end

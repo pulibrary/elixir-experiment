@@ -33,6 +33,7 @@ defmodule DigitalCollections.MixProject do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:ci), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -49,8 +50,9 @@ defmodule DigitalCollections.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:credo, "~> 1.4", only: [:dev, :test, :ci], runtime: false},
+      {:excoveralls, "~> 0.10", only: [:test, :ci]},
+      {:hui, "~> 0.10.3"}
     ]
   end
 
