@@ -5,7 +5,7 @@ defmodule Catalog do
     A context holding functions for interacting with Solr.
   """
   def add(record = %Record{}) do
-    output = Hui.update(:updater, [record |> Map.from_struct])
+    output = Hui.update(:updater, [record |> Catalog.Solr.Mapper.to_solr])
     IEx.pry
     {:ok}
   end

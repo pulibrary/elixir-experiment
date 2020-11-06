@@ -16,7 +16,7 @@ config :hui, :default,
 config :hui, :updater,
   url: "http://digital_collections.test.solr.lndo.site/solr/digital_collections-core-test",
   handler: "update", # optional
-  headers: [{"accept", "application/json"}], # optional
+  headers: [{"Content-Type", "application/json"}], # optional
   options: [recv_timeout: 10000] # optional
 
 # Print only warnings and errors during test

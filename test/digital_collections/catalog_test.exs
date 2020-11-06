@@ -4,13 +4,13 @@ defmodule CatalogTest do
   test ".add" do
     record = %DigitalCollections.Record{
       id: "1",
-      title: "My Book",
-      author: "Me",
+      titles: ["My Book"],
+      authors: ["Me"],
       subjects: ["computers", "hacky sack"]
     }
 
     {:ok} = Catalog.add(record)
     record = Catalog.get(record.id)
-    assert record.title == "My Book"
+    assert record.titles == ["My Book"]
   end
 end

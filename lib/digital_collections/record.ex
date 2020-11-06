@@ -4,8 +4,19 @@ defmodule DigitalCollections.Record do
   """
   defstruct [
     :id,
-    :title,
-    :author,
+    :titles,
+    :authors,
     :subjects
   ]
+end
+
+defimpl Catalog.Solr.Mapper, for: DigitalCollections.Record do
+  def to_solr(record) do
+    %{
+      id: record.id,
+      titles_ssim: record.titles,
+      authors_ssim: record.authors,
+      subjects_ssim: record.subjects
+    }
+  end
 end
