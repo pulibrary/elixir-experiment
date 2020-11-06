@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: circleci/elixir:1.9-node
         environment:
-          MIX_ENV: test
+          MIX_ENV: ci
           HTTP_PORT: 4000
       - image: zookeeper:3.4
       - image: solr:8.4
