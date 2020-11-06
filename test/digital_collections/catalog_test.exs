@@ -1,8 +1,9 @@
 defmodule CatalogTest do
   use ExUnit.Case
+  alias DigitalCollections.{Record, Catalog}
 
   test ".add" do
-    record = %DigitalCollections.Record{
+    record = %Record{
       id: "1",
       titles: ["My Book"],
       authors: ["Me"],
