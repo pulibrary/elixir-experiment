@@ -10,7 +10,6 @@ defmodule DigitalCollections.Record do
   ]
 end
 
-# TODO: rename to encoder
 defimpl DigitalCollections.Solr.Encoder, for: DigitalCollections.Record do
   def to_solr(record) do
     %{

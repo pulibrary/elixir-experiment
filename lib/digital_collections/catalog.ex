@@ -17,7 +17,7 @@ defmodule DigitalCollections.Catalog do
     Solr.Decoder.from_solr(record)
   end
 
-  def search(query) do
-
+  def search(:all) do
+    Hui.q(q:"*", qt: "search")
   end
 end

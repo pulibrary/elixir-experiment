@@ -1,6 +1,7 @@
 defmodule CatalogTest do
   use ExUnit.Case, async: true
-  alias DigitalCollections.{Record, Catalog, Document}
+  import DigitalCollections.Factories
+  alias DigitalCollections.{Record, Catalog, Document, Results}
 
   test ".add" do
     record = %Record{
@@ -29,6 +30,8 @@ defmodule CatalogTest do
   end
 
   test ".search" do
-
+    build_list(5, :record) |> Enum.map(&Catalog.add/1)
+    {:ok, results=%Results{}} = Catalog.search(:all)
+    assert results.total_hits == 5
   end
 end
