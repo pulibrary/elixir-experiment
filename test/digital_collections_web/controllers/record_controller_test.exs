@@ -1,6 +1,6 @@
 defmodule DigitalCollectionsWeb.RecordControllerTest do
   alias DigitalCollections.Record
-  use DigitalCollectionsWeb.ConnCase
+  use DigitalCollectionsWeb.ConnCase, async: true
 
   test "GET /record/:id", %{conn: conn} do
     DigitalCollections.Catalog.add(%Record{id: "321", titles: ["I'm a record"] })

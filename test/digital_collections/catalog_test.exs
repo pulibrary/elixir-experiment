@@ -1,5 +1,5 @@
 defmodule CatalogTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias DigitalCollections.{Record, Catalog, Document}
 
   test ".add" do
