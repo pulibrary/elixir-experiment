@@ -27,4 +27,8 @@ defmodule CatalogTest do
     %Document{} = document
     assert document.titles == ["My Book"]
   end
+
+  test ".search" do
+
+  end
 end

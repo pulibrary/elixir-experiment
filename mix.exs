@@ -52,7 +52,8 @@ defmodule DigitalCollections.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:credo, "~> 1.4", only: [:dev, :test, :ci], runtime: false},
       {:excoveralls, "~> 0.10", only: [:test, :ci]},
-      {:hui, "~> 0.10.3"}
+      {:hui, "~> 0.10.3"},
+      {:ex_machina, "~> 2.4", only: [:test]}
     ]
   end
 

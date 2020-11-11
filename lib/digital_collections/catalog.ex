@@ -16,4 +16,8 @@ defmodule DigitalCollections.Catalog do
     {:ok, %{body: %{"response" => %{"docs" => [record | _] }}}} = Hui.q("id:#{id}")
     Solr.Decoder.from_solr(record)
   end
+
+  def search(query) do
+
+  end
 end
