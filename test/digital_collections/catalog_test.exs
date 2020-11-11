@@ -1,5 +1,5 @@
 defmodule CatalogTest do
-  use ExUnit.Case, async: true
+  use SolrCase
   import DigitalCollections.Factories
   alias DigitalCollections.{Record, Catalog, Document, Results}
 
@@ -29,9 +29,18 @@ defmodule CatalogTest do
     assert document.titles == ["My Book"]
   end
 
+  test ".delete" do
+    build(:record) |> Catalog.add
+
+    Catalog.delete(:all)
+
+    results=%Results{} = Catalog.search(:all)
+    assert results.total_hits == 0
+  end
+
   test ".search" do
     build_list(5, :record) |> Enum.map(&Catalog.add/1)
-    {:ok, results=%Results{}} = Catalog.search(:all)
+    results=%Results{} = Catalog.search(:all)
     assert results.total_hits == 5
   end
 end

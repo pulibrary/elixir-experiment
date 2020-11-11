@@ -1,6 +1,5 @@
 defmodule DigitalCollections.Catalog do
-  alias DigitalCollections.Record
-  alias DigitalCollections.Solr
+  alias DigitalCollections.{Record, Solr, Results}
   @moduledoc """
     A context holding functions for interacting with Solr.
   """
@@ -17,7 +16,18 @@ defmodule DigitalCollections.Catalog do
     Solr.Decoder.from_solr(record)
   end
 
+  def delete(:all) do
+    Hui.delete_by_query(:updater, "*:*")
+  end
+
   def search(:all) do
-    Hui.q(q:"*", qt: "search")
+    {:ok, %{body: solr_body}} = Hui.q(q: "*", qt: "search")
+    solr_body |> to_results
+  end
+
+  def to_results(solr_body) do
+    %Results{
+      total_hits: solr_body["response"]["numFound"]
+    }
   end
 end
