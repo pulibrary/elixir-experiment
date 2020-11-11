@@ -1,5 +1,5 @@
 defmodule RecordTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   test "a record has fields" do
     record = %DigitalCollections.Record{

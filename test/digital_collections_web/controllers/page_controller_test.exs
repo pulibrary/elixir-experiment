@@ -1,5 +1,5 @@
 defmodule DigitalCollectionsWeb.PageControllerTest do
-  use DigitalCollectionsWeb.ConnCase
+  use DigitalCollectionsWeb.ConnCase, async: true
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")
