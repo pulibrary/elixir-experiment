@@ -26,9 +26,12 @@ config :phoenix, :json_library, Jason
 # Configure solr
 config :hui, :default,
   url: "http://digital_collections.dev.solr.lndo.site/solr/digital_collections-core-dev",
-  handler: "select", # optional
-  headers: [{"accept", "application/json"}], # optional
-  options: [recv_timeout: 10000] # optional
+  # optional
+  handler: "select",
+  # optional
+  headers: [{"accept", "application/json"}],
+  # optional
+  options: [recv_timeout: 10000]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

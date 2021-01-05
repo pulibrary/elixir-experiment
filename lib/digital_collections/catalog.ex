@@ -1,5 +1,6 @@
 defmodule DigitalCollections.Catalog do
   alias DigitalCollections.{Record, Solr, Results}
+
   @moduledoc """
     A context holding functions for interacting with Solr.
   """
@@ -8,11 +9,11 @@ defmodule DigitalCollections.Catalog do
   returns whatever Hui returns which looks like {:ok, response} on a good day
   """
   def add(record = %Record{}) do
-    Hui.update(:updater, [record |> Solr.Encoder.to_solr])
+    Hui.update(:updater, [record |> Solr.Encoder.to_solr()])
   end
 
   def get(id) do
-    {:ok, %{body: %{"response" => %{"docs" => [record | _] }}}} = Hui.q("id:#{id}")
+    {:ok, %{body: %{"response" => %{"docs" => [record | _]}}}} = Hui.q("id:#{id}")
     Solr.Decoder.from_solr(record)
   end
 
@@ -27,7 +28,8 @@ defmodule DigitalCollections.Catalog do
 
   def to_results(solr_body) do
     %Results{
-      total_hits: solr_body["response"]["numFound"]
+      total_hits: solr_body["response"]["numFound"],
+      documents: solr_body["response"]["docs"] |> Enum.map(&Solr.Decoder.from_solr/1)
     }
   end
 end

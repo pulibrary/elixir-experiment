@@ -30,17 +30,19 @@ defmodule CatalogTest do
   end
 
   test ".delete" do
-    build(:record) |> Catalog.add
+    build(:record) |> Catalog.add()
 
     Catalog.delete(:all)
 
-    results=%Results{} = Catalog.search(:all)
+    results = %Results{} = Catalog.search(:all)
     assert results.total_hits == 0
   end
 
   test ".search" do
     build_list(5, :record) |> Enum.map(&Catalog.add/1)
-    results=%Results{} = Catalog.search(:all)
+    results = %Results{} = Catalog.search(:all)
     assert results.total_hits == 5
+    assert results.documents |> length == 5
+    %Document{} = results.documents |> hd
   end
 end

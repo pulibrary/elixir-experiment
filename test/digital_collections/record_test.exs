@@ -8,6 +8,7 @@ defmodule RecordTest do
       authors: ["Me"],
       subjects: ["computers", "hacky sack"]
     }
+
     assert record.id == "1"
     assert record.titles == ["My Book"]
     assert record.authors == ["Me"]
