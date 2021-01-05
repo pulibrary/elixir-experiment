@@ -22,7 +22,9 @@ defmodule DigitalCollections.Catalog do
   end
 
   def search(:all) do
-    {:ok, %{body: solr_body}} = Hui.q(q: "*", qt: "search", facet: true, "facet.field": ["authors_ssim", "subjects_ssim"])
+    {:ok, %{body: solr_body}} =
+      Hui.q(q: "*", qt: "search", facet: true, "facet.field": ["authors_ssim", "subjects_ssim"])
+
     solr_body |> to_results
   end
 
@@ -30,7 +32,7 @@ defmodule DigitalCollections.Catalog do
     %Results{
       total_hits: solr_body["response"]["numFound"],
       documents: solr_body["response"]["docs"] |> Enum.map(&Solr.Decoder.from_solr/1),
-      facets: solr_body["facet_counts"]["facet_fields"] |> Solr.Decoder.to_facet
+      facets: solr_body["facet_counts"]["facet_fields"] |> Solr.Decoder.to_facet()
     }
   end
 end

@@ -45,5 +45,7 @@ defmodule CatalogTest do
     assert results.documents |> length == 5
     %Document{} = results.documents |> hd
     assert results.facets |> length == 2
+    facet = results.facets |> hd
+    assert {"Authors", [{_, 1} | _]} = facet
   end
 end
