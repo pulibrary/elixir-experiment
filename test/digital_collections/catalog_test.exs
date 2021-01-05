@@ -44,5 +44,6 @@ defmodule CatalogTest do
     assert results.total_hits == 5
     assert results.documents |> length == 5
     %Document{} = results.documents |> hd
+    assert results.facets |> length == 2
   end
 end

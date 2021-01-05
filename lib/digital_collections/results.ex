@@ -4,6 +4,7 @@ defmodule DigitalCollections.Results do
   """
   defstruct [
     :total_hits,
-    documents: []
+    documents: [],
+    facets: []
   ]
 end

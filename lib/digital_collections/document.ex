@@ -20,4 +20,8 @@ defmodule DigitalCollections.Solr.Decoder do
       subjects: map["subjects_ssim"]
     }
   end
+
+  def to_facet(facets) do
+    []
+  end
 end
