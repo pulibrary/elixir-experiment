@@ -53,7 +53,7 @@ defmodule DigitalCollections.MixProject do
       {:credo, "~> 1.4", only: [:dev, :test, :ci], runtime: false},
       {:excoveralls, "~> 0.10", only: [:test, :ci]},
       {:hui, "~> 0.10.3"},
-      {:ex_machina, "~> 2.4", only: [:test]}
+      {:ex_machina, "~> 2.4", only: [:test, :ci]}
     ]
   end
 
